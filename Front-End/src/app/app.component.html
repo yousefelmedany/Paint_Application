@@ -1,0 +1,111 @@
+<html>
+<body>
+
+<div style="background-image:url('./assets/back2.jpg');padding-top: 10px; padding-bottom: 30px; padding-left: 50px;">
+
+<div class="header">
+  <button class="buttons" (click)="opens(save)">Save</button>
+  <button class="buttons" (click)="openl(load)">Load</button>
+  <button class="buttons" style="width:100px" (click)="clear()">Clear All</button>
+<h1>Let's Paint!</h1>
+
+</div>
+<div class="main">
+
+<div class="sidebar">
+
+  <button id="draw">Draw</button>
+    <div class="shape">
+  <button class="buttons" (click)="draw('square')">Square &#9744;</button>
+  <button class="buttons" (click)="draw('rectangle')">Rectangle &#9645;</button>
+  <button class="buttons" (click)="draw('triangle')">Triangle &#9651;</button>
+  <button class="buttons" (click)="draw('circle')">Circle &#9711;</button>
+  <button class="buttons" (click)="draw('ellipse')">Ellipse &#11055;</button>
+  <button class="buttons" (click)="draw('line')">Line &#124;</button>
+    </div>
+
+    <button id="option">Options</button>
+      <div class="file">
+        <button class="buttons" (click)="undo()">&#10554;</button>
+        <button class="buttons" (click)="redo()">&#10556;</button>
+        <button class="buttons" (click)="clone()" id="copy">&#10063;</button>    
+      </div>
+      <div class="labels">
+        <h3>Undo</h3>
+        <h3>Redo</h3>
+        <h3>Copy</h3>
+      </div>
+      <div class="options">
+        <div style="display:flex;">
+        <label for="Color-Pallete" style="font-size: 22px;width: 290px;text-align: center;justify-content: center; color:black;font-weight: 500; margin-top: 2px;" >Color Palette</label>
+        <input class="buttons" type="color" #color1 (blur)="change_colour(color1.value)" style="border-radius:10px ; background-color: lightgrey; width: 100px; height: 35px;">
+        </div>
+        <button class="buttons" (click)="delete()">Erase</button>
+        <button class="buttons" (click)="bordercolor()">Color-Border</button>
+        <button class="buttons" (click)="colorize()">Color</button>
+      </div>
+
+
+
+  </div>
+
+  <div id="whiteboard">
+
+  </div>
+
+</div>
+
+</div>
+
+
+<ng-template #save let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Save</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="FileName">FileName</label>
+          <input id="firstname" class="form-control" #filename (blur)="setfilename(filename.value)">
+        <label for="filepath">FilePath</label>
+          <input id="firstname" class="form-control" #filepath (blur)="setfilepath(filepath.value)">
+          <label for="SaveType" style="margin-bottom: 5px;">Choose an Extension to Save File in</label><br>
+          <input type="radio" id="json" name="SaveType" value="json" #jsonext (blur)="setexttype(jsonext.value)" >
+          <label for="json" style="margin-right: 150px;">JSON</label>
+          <input type="radio" id="xml" name="SaveType" value="xml" #xmlext (blur)="setexttype(xmlext.value)">
+          <label for="xml">XML</label><br>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');saved()"  [disabled]="check1">done</button>
+  </div>
+</ng-template>
+
+
+<ng-template #load let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Load File</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="filepath">Enter filepath to Load</label>
+          <input id="firstname" class="form-control" #loadfilepath (blur)="setloadfilepath(loadfilepath.value)">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');loadshapes()" [disabled]="check2">Enter</button>
+  </div>
+</ng-template>
+
+
+</body>  
+</html>
